@@ -6,17 +6,19 @@ Console.WriteLine(Kata.GetLongestPalindrome("aa"));
 Console.WriteLine(Kata.GetLongestPalindrome("abc0cba1"));
 Console.WriteLine(Kata.GetLongestPalindrome("12 21glg"));
 Console.WriteLine(Kata.GetLongestPalindrome("   "));
+
 public class Kata
 {
     public static int GetLongestPalindrome(string? str)
     {
         var substrings = FindAllSubstrings(str ?? "");
-        var reversedSubstrings = FindAllSubstrings(string.Concat(str?.Reverse() ?? "") );
+        var reversedSubstrings = FindAllSubstrings(string.Concat(str?.Reverse() ?? ""));
         var commonSubstrings = substrings.Intersect(reversedSubstrings);
-        string? longestSubstring = commonSubstrings.OrderByDescending(x => x.Length).FirstOrDefault();
+        string? longestSubstring = commonSubstrings
+            .OrderByDescending(x => x.Length)
+            .FirstOrDefault();
 
         return longestSubstring?.Length ?? 0;
-
     }
 
     private static IEnumerable<string> FindAllSubstrings(string s)
